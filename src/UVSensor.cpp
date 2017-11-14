@@ -16,6 +16,7 @@ UVSensor::UVSensor(int rate,
    sampleIndex = 0;
    UVDetected = false;
    state = S_Wait;
+   uvIndex = 0.0;
 }
 //#define Addr 0x38
 //-------------------------------------------------------------------
@@ -54,7 +55,7 @@ void UVSensor::execute() {
          }
          avgMagnitude = avgMagnitude / samples;
 
-         if (avgMagnitude > threshold) {
+         if (avgMagnitude >= threshold) {
             state = UVSensor::S_Detected;
          }
          else {
@@ -64,6 +65,7 @@ void UVSensor::execute() {
 
       case UVSensor::S_Detected:
          UVDetected = true;
+         uvIndex = avgMagnitude;
          state = UVSensor::S_WaitUntilReported;
          break;
 
@@ -89,6 +91,7 @@ bool UVSensor::isDetected() {
 
 void UVSensor::setReported() {
    UVDetected = false;
+   uvIndex = 0.0;
 }
 
 //-------------------------------------------------------------------

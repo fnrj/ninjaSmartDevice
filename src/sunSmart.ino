@@ -70,7 +70,7 @@ void setup() {
     Wire.endTransmission();
     delay(300);
     // Handler for response from POSTing location to server
-    Particle.subscribe("hook-response/holz", responseHandler, MY_DEVICES);
+    Particle.subscribe("hook-response/putStatus", responseHandler, MY_DEVICES);
 
     stateMachineTimer.start();
 }

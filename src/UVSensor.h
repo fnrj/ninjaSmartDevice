@@ -32,6 +32,7 @@ private:
     int sampleIndex;
     bool UVDetected;
     float avgMagnitude;
+
 //    Adafruit_VEML6070& veml6070;
 
 public:
@@ -41,6 +42,7 @@ public:
     void execute();
     //uint16_t readUVmagnitude();
     uint16_t readUV(); //uv function from particle library
+    float uvIndex;
 };
 
 //-------------------------------------------------------------------

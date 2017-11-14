@@ -35,8 +35,8 @@ void SSLocationReporter::execute() {
 
         case SSLocationReporter::S_Publish:
             if (gpsSensor.gpsFix()) {
-                postData = String::format("{ \"longitude\": \"%f\", \"latitude\": \"%f\" }",
-                                          gpsSensor.readLatDeg(), gpsSensor.readLonDeg());
+                postData = String::format("{ \"longitude\": \"%f\", \"latitude\": \"%f\", \"uv\": \"%f\" }",
+                                          gpsSensor.readLatDeg(), gpsSensor.readLonDeg(),uvSensor.uvIndex);
             }
             else {
                 Serial.println("DEBUG: No GPS fix");
@@ -45,7 +45,7 @@ void SSLocationReporter::execute() {
             }
 
             Serial.println(postData);
-            Particle.publish("holz", postData);
+            Particle.publish("putStatus", postData);
             uvSensor.setReported();
 
             state = SSLocationReporter::S_LedNotify;
