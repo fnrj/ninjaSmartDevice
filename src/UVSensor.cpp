@@ -78,7 +78,7 @@ void UVSensor::execute() {
          }
          break;
    }
-   Serial.println("UV Sensor state"+String(state));
+   //Serial.println("UV Sensor state"+String(state));
 }
 
 //-------------------------------------------------------------------
@@ -143,7 +143,7 @@ void UVSensor::setReported() {
   uvi <<= 8;
   if (Wire.requestFrom(VEML6070_ADDR_L, 1) != 1) {Serial.println("UV Light of The Device (library) : Read low byte error"); return -1;}
   uvi |= Wire.read();
-  Serial.println("UV Light of The Device (library) : "+String(uvi));
+  //Serial.println("UV Light of The Device (library) : "+String(uvi));
   return uvi;
-  delay(1000);
+  delay(10);
 }

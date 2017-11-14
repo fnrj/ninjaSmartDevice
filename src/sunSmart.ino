@@ -31,7 +31,6 @@ void executeStateMachines() {
 }
 
 Timer stateMachineTimer(10, executeStateMachines);
-
 //-------------------------------------------------------------------
 
 void responseHandler(const char *event, const char *data) {
@@ -73,6 +72,8 @@ void setup() {
     Particle.subscribe("hook-response/putStatus", responseHandler, MY_DEVICES);
 
     stateMachineTimer.start();
+    // synchronize time when particle power up
+    Particle.syncTime();
 }
 
 //-------------------------------------------------------------------

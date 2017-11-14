@@ -56,7 +56,9 @@ void SSLocationReporter::execute() {
             ++tick;
 
             // Keep LED on for 2 seconds
-            if (tick == 200) {
+            //if (tick == 200) {
+            // Keep LED on for 20 seconds decrease request integration rate
+            if (tick == 2000) {
                 state = SSLocationReporter::S_Wait;
             }
             else {
@@ -64,7 +66,7 @@ void SSLocationReporter::execute() {
             }
             break;
     }
-    Serial.println("gps_state"+String(state));
+    //Serial.println("gps_state"+String(state));
 }
 
 //-------------------------------------------------------------------
