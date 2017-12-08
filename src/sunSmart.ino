@@ -22,7 +22,8 @@ retained vector<String> queueData;
 retained String postData;
 
 AssetTracker locationTracker = AssetTracker();
-UVSensor uvSensor(/*veml6070,*/ 5, 6000, 0);
+UVSensor uvSensor(/*veml6070,*/ 5, 6000, 0); // Normal mode. UV aggregation around 1-2 minutes
+//UVSensor uvSensor(/*veml6070,*/ 5, 400, 0); // wifi disconnected testing
 SSLocationReporter sslocationReporter(locationTracker, uvSensor, &queueData, &postData);
 
 //-------------------------------------------------------------------
