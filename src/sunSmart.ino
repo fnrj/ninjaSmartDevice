@@ -17,12 +17,16 @@ using namespace std;
 unsigned long lastSync = millis();
 
 //-------------------------------------------------------------------
+STARTUP(System.enableFeature(FEATURE_RETAINED_MEMORY));
+retained vector<String> queueData;
+retained String postData;
 
 AssetTracker locationTracker = AssetTracker();
-UVSensor uvSensor(/*veml6070,*/ 5, 3, 0);
-SSLocationReporter sslocationReporter(locationTracker, uvSensor);
+UVSensor uvSensor(/*veml6070,*/ 5, 6000, 0);
+SSLocationReporter sslocationReporter(locationTracker, uvSensor, &queueData, &postData);
 
 //-------------------------------------------------------------------
+
 
 void executeStateMachines() {
     locationTracker.updateGPS();

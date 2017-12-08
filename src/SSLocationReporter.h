@@ -4,12 +4,13 @@
 //-------------------------------------------------------------------
 
 #include <AssetTracker.h>
+//#include <queue>
 #include "UVSensor.h"
 
 //-------------------------------------------------------------------
 
 class SSLocationReporter {
-   enum State { S_Wait, S_Publish, S_LedNotify };
+   enum State { S_Wait, S_DataPush, S_Publish, S_LedNotify };
 
 private:
     int rate;
@@ -22,7 +23,9 @@ private:
     UVSensor& uvSensor;
 
 public:
-    SSLocationReporter(AssetTracker &theTracker, UVSensor &theDetector);
+    vector <String>* queueData;
+    String* postData;
+    SSLocationReporter(AssetTracker &theTracker, UVSensor &theDetector, vector <String>* queueData, String* postData);
     void execute();
 };
 
