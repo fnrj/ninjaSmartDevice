@@ -35,7 +35,7 @@ void SSLocationReporter::execute() {
             break;
         case SSLocationReporter::S_DataPush:
             if (gpsSensor.gpsFix()) {
-                *postData = String::format("{ \"longitude\": \"%f\", \"latitude\": \"%f\", \"uv\": \"%f\", \"loggingTime\": \"%s\"}",
+                *postData = String::format("{ \"longitude\": \"%f\", \"latitude\": \"%f\", \"uv\": \"%f\", \"loggedTime\": \"%s\"}",
                                       gpsSensor.readLatDeg(), gpsSensor.readLonDeg(),uvSensor.uvIndex,Time.format(TIME_FORMAT_ISO8601_FULL).c_str());
                 //Serial.println("Push Time:");
                 //Serial.println(Time.format(TIME_FORMAT_ISO8601_FULL).c_str());
@@ -73,13 +73,15 @@ void SSLocationReporter::execute() {
             break;
 
         case SSLocationReporter::S_LedNotify:
-            digitalWrite(led, HIGH);
+            if (uvSensor.uvIndex>800){
+              digitalWrite(led, HIGH);
+            }
             ++tick;
 
             // Keep LED on for 2 seconds
             //if (tick == 200) {
-            // Keep LED on for 2 seconds decrease request integration rate
-            if (tick == 200) {
+            // Keep LED on for 10 seconds decrease request integration rate
+            if (tick == 1000) {
                 state = SSLocationReporter::S_Wait;
             }
             else {
