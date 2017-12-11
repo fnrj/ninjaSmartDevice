@@ -73,7 +73,7 @@ void SSLocationReporter::execute() {
             break;
 
         case SSLocationReporter::S_LedNotify:
-            if (uvSensor.uvIndex>800){
+            if (uvSensor.uvIndex>2240){
               digitalWrite(led, HIGH);
             }
             ++tick;
